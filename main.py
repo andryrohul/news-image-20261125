@@ -258,11 +258,11 @@ def scene_port(cv, x, y, w, h):
     cv.circle(x + w - 52, y + 20, 11, YELLOW)
     # two dock cranes
     for gx in (x + 50, x + 196):
-        cv.rect(gx, y + 14, 7, h - 40, NAVY)
-        cv.rect(gx, y + 14, 84, 7, NAVY)
-        cv.line(gx + 78, y + 21, gx + 78, y + 38, NAVY, 3)
-        cv.rect(gx + 66, y + 38, 24, 13, ORANGE)
-        cv.rect(gx - 18, y + 21, 7, 14, NAVY)
+        cv.rect(gx, y + 16, 7, h - 40, NAVY)
+        cv.rect(gx, y + 16, 84, 7, NAVY)
+        cv.line(gx + 78, y + 23, gx + 78, y + 42, NAVY, 3)
+        cv.rect(gx + 66, y + 42, 24, 15, ORANGE)
+        cv.rect(gx - 18, y + 23, 7, 16, NAVY)
     # stacked containers on the quay
     cols = [(196, 60, 40), (30, 90, 160), (30, 140, 80), (220, 150, 30),
             (120, 60, 150), (40, 130, 170)]
@@ -286,31 +286,37 @@ def scene_port(cv, x, y, w, h):
 
 def scene_cairo(cv, x, y, w, h):
     cv.rect(x, y, w, h, (238, 226, 205))
-    cv.rect(x, y + h - 8, w, 8, (70, 66, 62))
-    cv.rect(x, y + h - 8, w, 2, (120, 116, 110))
-    # smoke puffs above the flames
-    for (sx, sy, sr) in ((196, 7, 6), (224, 5, 8), (254, 7, 6)):
+    cv.rect(x, y + h - 16, w, 16, (70, 66, 62))
+    cv.rect(x, y + h - 16, w, 3, (120, 116, 110))
+    # smoke
+    for (sx, sy, sr) in ((150, 12, 13), (178, 8, 17), (212, 12, 12),
+                         (120, 16, 9)):
         cv.circle(x + sx, y + sy, sr, (150, 146, 140))
-    # flames rising behind and over the tanker
-    cv.tri(x + 58, y + h - 9, x + 76, y + 1, x + 94, y + h - 9, ORANGE)
-    cv.tri(x + 68, y + h - 9, x + 80, y + 7, x + 92, y + h - 9, YELLOW)
-    cv.tri(x + 104, y + h - 9, x + 118, y + 3, x + 132, y + h - 9, RED)
-    cv.tri(x + 236, y + h - 9, x + 246, y + 8, x + 256, y + h - 9, ORANGE)
-    # tanker truck, side view: tank, cab, wheels
-    cv.rect(x + 36, y + h - 23, 118, 13, (196, 200, 204))
-    cv.frame(x + 36, y + h - 23, 118, 13, INK, 2)
-    cv.rect(x + 154, y + h - 20, 24, 10, NAVY)
-    cv.tri(x + 178, y + h - 20, x + 190, y + h - 10, x + 154, y + h - 10,
+    # flames behind the tanker
+    cv.tri(x + 96, y + h - 18, x + 122, y + 8, x + 148, y + h - 18, ORANGE)
+    cv.tri(x + 128, y + h - 18, x + 150, y + 16, x + 172, y + h - 18, RED)
+    cv.tri(x + 108, y + h - 18, x + 124, y + 22, x + 140, y + h - 18, YELLOW)
+    cv.tri(x + 232, y + h - 18, x + 246, y + 20, x + 260, y + h - 18, ORANGE)
+    cv.tri(x + 240, y + h - 18, x + 250, y + 30, x + 258, y + h - 18, YELLOW)
+    # tanker truck, side view
+    cv.rect(x + 52, y + h - 40, 128, 22, (196, 200, 204))
+    cv.frame(x + 52, y + h - 40, 128, 22, INK, 2)
+    cv.rect(x + 180, y + h - 36, 30, 18, NAVY)
+    cv.tri(x + 210, y + h - 36, x + 226, y + h - 18, x + 180, y + h - 18,
            NAVY)
-    for wx in (58, 92, 164):
-        cv.circle(x + wx, y + h - 8, 5, BLACK)
-        cv.circle(x + wx, y + h - 8, 2, (170, 170, 170))
+    for wx in (78, 116, 188):
+        cv.circle(x + wx, y + h - 15, 8, BLACK)
+        cv.circle(x + wx, y + h - 15, 3, (170, 170, 170))
     # charred cars to the right
-    for bx in (282, 372):
-        cv.rect(x + bx, y + h - 17, 56, 8, (30, 28, 26))
-        cv.rect(x + bx + 11, y + h - 23, 32, 7, (30, 28, 26))
-        cv.circle(x + bx + 13, y + h - 8, 4, BLACK)
-        cv.circle(x + bx + 43, y + h - 8, 4, BLACK)
+    for bx in (268, 356):
+        cv.rect(x + bx, y + h - 30, 62, 13, (30, 28, 26))
+        cv.rect(x + bx + 12, y + h - 40, 36, 11, (30, 28, 26))
+        cv.circle(x + bx + 14, y + h - 16, 6, BLACK)
+        cv.circle(x + bx + 48, y + h - 16, 6, BLACK)
+    # flames over the tank, drawn last so the fire reads at any height
+    cv.tri(x + 66, y + h - 18, x + 86, y + 4, x + 106, y + h - 18, ORANGE)
+    cv.tri(x + 80, y + h - 18, x + 94, y + 12, x + 108, y + h - 18, YELLOW)
+    cv.tri(x + 118, y + h - 18, x + 132, y + 8, x + 146, y + h - 18, RED)
     cv.frame(x, y, w, h, INK, 2)
 
 
@@ -319,7 +325,7 @@ def scene_space(cv, x, y, w, h):
     # deterministic star field
     for i in range(46):
         sx = x + (i * 53 + 17) % (w - 12) + 4
-        sy = y + (i * 29 + 7) % max(10, h - 16) + 3
+        sy = y + (i * 29 + 7) % (h - 30) + 3
         cv.rect(sx, sy, 2, 2, WHITE)
     # earth horizon along the bottom of the scene
     cv.rect(x, y + h - 13, w, 13, (44, 96, 168))
@@ -343,59 +349,48 @@ def scene_space(cv, x, y, w, h):
     cv.frame(x, y, w, h, INK, 2)
 
 
-# Each brief: (headline, label, detail, spot icon or None). Labels and
-# figures are exactly as in the verified 25 November news brief.
-COLUMNS = [
-    [
-        ("AMERICAS", [
-            ("CARTAGENA 76 FREE", "CONFIRMED", "1 DEAD, 4 HELD", None),
-            ("IOWA: 5 TONS GONE", "CONFIRMED", "ALL LEAD AZIDE", None),
-            ("MACY'S PARADE OFF", "CONFIRMED", "FIRST EVER", "balloon"),
-            ("ABREGO IN SPAIN", "CONFIRMED", "SENT IN ERROR", None),
-            ("KING TIDES THREAT", "FORECAST", "FLOOD WATCH: CA", None),
-            ("TRAVEL SNARLED", "FORECAST", "STORM DELAYS", None),
-        ]),
-        ("UKRAINE WAR", [
-            ("112 DRONES; 7 DEAD", "REPORTED", "88 DOWNED", None),
-            ("5 JETS HIT AT BASE", "CLAIM", "3 MIG-31, 2 SU-34", None),
-            ("490,334 DEAD: LEAK", "REPORTED", "TRUE TOLL 527K+", None),
-            ("SAMARA FIRES", "REPORTED", "ROSTOV PLANT TOO", None),
-            ("ENERGY SITES HIT", "REPORTED", "5 OBLASTS DARK", None),
-        ]),
-    ],
-    [
-        ("MIDDLE EAST", [
-            ("GAZA CHIEF KILLED", "REPORTED", "FAMILY DIES TOO", None),
-            ("NETANYAHU: DROP 2", "CONFIRMED", "JUDGES URGE IT", None),
-            ("GAZA: 1,000 SITES", "FORECAST", "RAINS THREATEN", None),
-            ("3 MORE DIE IN GAZA", "REPORTED", "ANOTHER STRIKE", None),
-        ]),
-        ("ASIA-PACIFIC & EUROPE", [
-            ("N. KOREA EXPELS 1", "REPORTED", "SWISS ENVOY", None),
-            ("CHEN JINING PROBED", "REPORTED", "SHANGHAI CHIEF", None),
-            ("INDIA GROUNDS DAS", "CONFIRMED", "PASSPORT HELD", None),
-            ("ANDY TAYLOR, 65", "CONFIRMED", "OF DURAN DURAN", None),
-            ("BULGARIA BOAT HELD", "REPORTED", "35 MIGRANTS", "boat"),
-            ("SPAIN VOTE PREVIEW", "FORECAST", "RACE EXPLAINED", None),
-        ]),
-    ],
-    [
-        ("MARKETS, TECH & SPACE", [
-            ("US GROWTH UP: 4.3%", "CONFIRMED", "REVISED UP", "chart"),
-            ("CORE PCE AT 3.3%", "CONFIRMED", "UP FROM 3.1%", None),
-            ("NVIDIA FALLS 3.9%", "CONFIRMED", "AT $149.30", None),
-            ("NASDAQ -4% AT OPEN", "CONFIRMED", "LATER STEADIES", None),
-            ("FCC OKAYS 1M SATS", "CONFIRMED", "STARMIND", "satellite"),
-            ("CONFIDENCE JUMPS", "CONFIRMED", "2-YEAR HIGH", None),
-            ("MORTGAGE EASES", "CONFIRMED", "NOW 7.21%", None),
-        ]),
-        ("AFRICA", [
-            ("NIGERIA: 30 KILLED", "REPORTED", "VILLAGES BURNED", None),
-            ("$227M METH LAB", "REPORTED", "5 MEXICANS HELD", None),
-            ("FARMGATE CASE ENDS", "CONFIRMED", "RAMAPHOSA SAFE", None),
-            ("TINUBU VOWS PEACE", "REPORTED", "BORDER REGIONS", None),
-        ]),
-    ],
+BRIEFS_ROW1 = [
+    ("AMERICAS", [
+        ("CARTAGENA 76 FREE", "CONFIRMED", "1 GUNMAN DEAD"),
+        ("IOWA: 5 TONS GONE", "CONFIRMED", "ALL LEAD AZIDE"),
+        ("MACY'S PARADE OFF", "CONFIRMED", "FIRST EVER"),
+        ("ABREGO IN SPAIN", "CONFIRMED", "SENT IN ERROR"),
+        ("KING TIDES THREAT", "FORECAST", "STORM FLOOD WATCH"),
+    ]),
+    ("MIDDLE EAST", [
+        ("GAZA CHIEF KILLED", "REPORTED", "HIS FAMILY TOO"),
+        ("NETANYAHU: DROP 2", "CONFIRMED", "JUDGES URGE IT"),
+        ("GAZA: 1,000 SITES", "FORECAST", "RAINS THREATEN"),
+        ("3 MORE DIE IN GAZA", "REPORTED", "ANOTHER STRIKE"),
+    ]),
+    ("MARKETS, TECH & SPACE", [
+        ("US GROWTH UP: 4.3%", "CONFIRMED", "CORE PCE 3.3%"),
+        ("NVIDIA FALLS 3.9%", "CONFIRMED", "AT $149.30"),
+        ("FCC OKAYS 1M SATS", "CONFIRMED", "STARMIND PLAN"),
+        ("MORTGAGE EASES", "CONFIRMED", "NOW 7.21%"),
+        ("CONFIDENCE JUMPS", "CONFIRMED", "NEAR 2-YEAR HIGH"),
+    ]),
+]
+
+BRIEFS_ROW2 = [
+    ("UKRAINE WAR", [
+        ("112 DRONES; 7 DEAD", "REPORTED", "88 DOWNED"),
+        ("5 JETS HIT AT BASE", "CLAIM", "KYIV SAYS STRIKE"),
+        ("490,334 DEAD: LEAK", "REPORTED", "BBC COUNT"),
+        ("SAMARA FIRES", "REPORTED", "REFINERY FIRES"),
+    ]),
+    ("ASIA-PACIFIC & EUROPE", [
+        ("N. KOREA EXPELS 1", "REPORTED", "SWISS ENVOY"),
+        ("CHEN JINING PROBED", "REPORTED", "SHANGHAI CHIEF"),
+        ("INDIA GROUNDS DAS", "CONFIRMED", "PASSPORT HELD"),
+        ("ANDY TAYLOR, 65", "CONFIRMED", "OF DURAN DURAN"),
+    ]),
+    ("AFRICA", [
+        ("NIGERIA: 30 KILLED", "REPORTED", "VILLAGES BURNED"),
+        ("$227M METH LAB", "REPORTED", "5 MEXICANS HELD"),
+        ("FARMGATE CASE ENDS", "CONFIRMED", "RAMAPHOSA SAFE"),
+        ("TINUBU VOWS PEACE", "REPORTED", "BORDER REGIONS"),
+    ]),
 ]
 
 MX = 18
@@ -404,67 +399,20 @@ COLX = (18, 351, 684)
 COLW = 322
 
 
-def icon_balloon(cv, x, y):
-    cv.circle(x + 14, y + 8, 7, RED)
-    cv.rect(x + 8, y + 3, 3, 3, WHITE)
-    cv.line(x + 10, y + 14, x + 13, y + 18, INK, 1)
-    cv.line(x + 18, y + 14, x + 15, y + 18, INK, 1)
-    cv.rect(x + 11, y + 18, 6, 4, AMBER)
-
-
-def icon_chart(cv, x, y):
-    cv.vline(x + 2, y + 2, 18, INK, 2)
-    cv.hline(x + 2, y + 19, 24, INK, 2)
-    cv.rect(x + 6, y + 13, 5, 6, GREEN)
-    cv.rect(x + 13, y + 9, 5, 10, GREEN)
-    cv.rect(x + 20, y + 5, 5, 14, GREEN)
-    cv.line(x + 5, y + 10, x + 24, y + 2, ORANGE, 2)
-
-
-def icon_boat(cv, x, y):
-    cv.tri(x + 15, y + 2, x + 15, y + 12, x + 23, y + 12, SKY)
-    cv.vline(x + 14, y + 2, 11, INK, 2)
-    cv.rect(x + 3, y + 13, 22, 5, NAVY)
-    cv.tri(x + 25, y + 13, x + 28, y + 13, x + 25, y + 18, NAVY)
-    cv.rect(x + 4, y + 20, 8, 2, SEA)
-    cv.rect(x + 16, y + 20, 8, 2, SEA)
-
-
-def icon_satellite(cv, x, y):
-    cv.rect(x + 1, y + 8, 8, 5, BLUE)
-    cv.rect(x + 20, y + 8, 8, 5, BLUE)
-    cv.rect(x + 9, y + 10, 3, 2, INK)
-    cv.rect(x + 17, y + 10, 3, 2, INK)
-    cv.rect(x + 11, y + 6, 7, 9, GREY)
-    cv.frame(x + 11, y + 6, 7, 9, INK, 1)
-    cv.circle(x + 14, y + 18, 2, ORANGE)
-
-
-ICONS = {
-    "balloon": icon_balloon,
-    "chart": icon_chart,
-    "boat": icon_boat,
-    "satellite": icon_satellite,
-}
-
-
 def section_bar(cv, x, y, w, name):
-    cv.rect(x, y, w, 18, NAVY)
-    cv.rect(x, y + 16, w, 2, RED)
-    draw_text(cv, x + 7, y + 2, name, 2, WHITE, bold=True)
+    cv.rect(x, y, w, 20, NAVY)
+    draw_text(cv, x + 7, y + 3, name, 2, WHITE, bold=True)
 
 
 def brief_block(cv, x, y, w, items):
     cy = y
-    for head, label, body, icon in items:
+    for head, label, body in items:
         draw_text(cv, x + 2, cy, head, 3, INK, bold=True)
-        draw_text(cv, x + 2, cy + 23, label, 2,
+        draw_text(cv, x + 2, cy + 25, label, 2,
                   LABEL_COLORS[label], bold=True)
         bx = x + 14 + text_width(label, 2)
-        draw_text(cv, bx, cy + 23, "- " + body, 2, (62, 59, 55))
-        if icon is not None:
-            ICONS[icon](cv, x + w - 32, cy + 13)
-        cy += 37
+        draw_text(cv, bx, cy + 25, "- " + body, 2, (62, 59, 55))
+        cy += 40
     return cy
 
 
@@ -473,85 +421,82 @@ def build():
     cv.frame(4, 4, W - 8, H - 8, INK, 3)
 
     # ---- masthead ------------------------------------------------------
-    draw_centered(cv, W // 2, 10, "ALL THE DAY'S NEWS - ON ONE PAGE - "
+    draw_centered(cv, W // 2, 12, "ALL THE DAY'S NEWS - ON ONE PAGE - "
                   "FINAL EDITION", 2, GREY)
-    draw_centered(cv, W // 2, 27, "THE WEDNESDAY LEDGER", 7, INK,
+    draw_centered(cv, W // 2, 32, "THE WEDNESDAY LEDGER", 7, INK,
                   bold=True, serif=True)
-    cv.hline(MX, 81, CW, INK, 4)
-    cv.hline(MX, 88, CW, INK, 1)
-    draw_centered(cv, W // 2, 93, "WEDNESDAY 25 NOVEMBER 2026", 5, RED,
+    cv.hline(MX, 88, CW, INK, 4)
+    cv.hline(MX, 96, CW, INK, 1)
+    draw_centered(cv, W // 2, 104, "WEDNESDAY 25 NOVEMBER 2026", 5, RED,
                   bold=True)
-    draw_centered(cv, W // 2, 133, "35 STORIES - 6 REGIONS - 12 FIELDS - "
-                  "TARIFFS LEAD THE DAY", 2, INK, bold=True)
-    draw_centered(cv, W // 2, 151, "CONFIRMED: SET FACT - REPORTED: 1 "
+    draw_centered(cv, W // 2, 142, "29 STORIES - 6 REGIONS - TARIFFS "
+                  "LEAD THE DAY", 2, INK, bold=True)
+    draw_centered(cv, W // 2, 160, "CONFIRMED: SET FACT - REPORTED: 1 "
                   "SOURCE - CLAIM: ONE SIDE - FORECAST: A WARNING",
                   2, GREY, bold=True)
-    cv.hline(MX, 169, CW, INK, 2)
+    cv.hline(MX, 178, CW, INK, 2)
 
     # ---- UTC timeline ---------------------------------------------------
-    cv.rect(MX, 175, CW, 33, CREAM)
-    cv.frame(MX, 175, CW, 33, INK, 2)
-    draw_text(cv, MX + 10, 179, "THE DAY IN UTC: 00:18 SHENZHOU-24 "
-              "LAUNCH - 03:56 TIANGONG DOCKING", 2, INK, bold=True)
-    draw_text(cv, MX + 10, 193, "06:30 CARTAGENA FREE - 08:00 88 DRONES "
-              "DOWN - 18:30 TOLL 21 - 22:18 TOLL 31", 2, INK)
+    cv.frame(MX, 184, CW, 34, INK, 2)
+    cv.rect(MX, 184, CW, 34, CREAM)
+    cv.frame(MX, 184, CW, 34, INK, 2)
+    draw_text(cv, MX + 10, 188, "THE DAY IN UTC: 00:18 SHENZHOU-24 "
+              "LAUNCHES - 03:56 DOCKS AT TIANGONG", 2, INK, bold=True)
+    draw_text(cv, MX + 10, 203, "06:30 CARTAGENA RESCUE - 18:30 CAIRO "
+              "TOLL UPDATE - 22:18 CAIRO TOLL 31", 2, INK)
 
     # ---- lead story: tariffs -------------------------------------------
-    kicker(cv, MX, 214, CW, "LEAD STORY - TRADE", "CONFIRMED")
-    draw_text(cv, MX, 237, "US PROPOSES NEW TARIFFS", 4, INK, bold=True)
-    draw_text(cv, MX, 263, "ON 14 TRADING PARTNERS", 4, INK, bold=True)
-    cv.frame(724, 234, 282, 62, RED, 3)
-    draw_centered(cv, 865, 238, "20%", 6, RED, bold=True)
-    draw_centered(cv, 865, 282, "PROPOSED CHINA RATE", 2, INK, bold=True)
-    scene_port(cv, MX, 298, 470, 64)
+    kicker(cv, MX, 226, CW, "LEAD STORY - TRADE", "CONFIRMED")
+    draw_text(cv, MX, 250, "US PROPOSES NEW TARIFFS", 4, INK, bold=True)
+    draw_text(cv, MX, 282, "ON 14 TRADING PARTNERS", 4, INK, bold=True)
+    cv.frame(724, 244, 282, 66, RED, 3)
+    draw_centered(cv, 865, 248, "20%", 6, RED, bold=True)
+    draw_centered(cv, 865, 292, "PROPOSED CHINA RATE", 2, INK, bold=True)
+    scene_port(cv, MX, 314, 470, 70)
     body = [
         "WASHINGTON PROPOSED FRESH DUTIES AFTER AN",
-        "8-MONTH SECTION 301 PROBE. PARTNERS ARE:",
-        "CHINA, EU, INDIA, JAPAN, KOREA, VIETNAM",
-        "+ 8 MORE. CHINA: 20% OVER TERM-1'S 25%.",
-        "COMMENTS FIRST; MAY SLIP TO JANUARY.",
+        "EIGHT-MONTH PROBE INTO EXCESS FACTORY",
+        "CAPACITY. CHINA FACES A PROPOSED 20%, ON",
+        "TOP OF ABOUT 25% FROM TRUMP'S FIRST TERM.",
+        "PUBLIC COMMENT FIRST; DUTIES MAY SLIP TO",
+        "JANUARY. BEIJING REJECTS THE ACCUSATION.",
     ]
     for i, line in enumerate(body):
-        draw_text(cv, 502, 298 + i * 15, line, 2, INK)
-    cv.hline(MX, 378, CW, INK, 2)
+        draw_text(cv, 502, 312 + i * 14, line, 2, INK)
+    cv.hline(MX, 402, CW, INK, 2)
 
     # ---- secondary leads -------------------------------------------------
-    kicker(cv, 18, 384, 482, "EGYPT - CAIRO", "CONFIRMED")
-    draw_text(cv, 18, 404, "CAIRO TANKER FIRE:", 3, INK, bold=True)
-    draw_text(cv, 18, 426, "AT LEAST 30 KILLED", 3, RED, bold=True)
-    scene_cairo(cv, 18, 452, 482, 30)
-    draw_text(cv, 18, 486, "TANKER OVERTURNED AND BURNED, CHARRING", 2, INK)
-    draw_text(cv, 18, 500, "24+ VEHICLES; TOLL ROSE 21 TO 31.", 2, INK)
+    kicker(cv, 18, 410, 482, "EGYPT - CAIRO", "CONFIRMED")
+    draw_text(cv, 18, 432, "CAIRO TANKER FIRE:", 3, INK, bold=True)
+    draw_text(cv, 18, 456, "AT LEAST 30 KILLED", 3, RED, bold=True)
+    scene_cairo(cv, 18, 482, 482, 40)
+    draw_text(cv, 18, 528, "TANKER OVERTURNED AND BURNED, CHARRING", 2, INK)
+    draw_text(cv, 18, 544, "24+ VEHICLES. TOLL STILL RISING.", 2, INK)
 
-    kicker(cv, 524, 384, 482, "SPACE - CHINA", "CONFIRMED")
-    draw_text(cv, 524, 404, "SHENZHOU-24 DOCKS AT", 3, INK, bold=True)
-    draw_text(cv, 524, 426, "TIANGONG STATION", 3, NAVY, bold=True)
-    scene_space(cv, 524, 452, 482, 30)
-    draw_text(cv, 524, 486, "ALI, 40: FIRST PAKISTANI IN ORBIT.", 2, INK)
-    draw_text(cv, 524, 500, "CREW OF 3; TANG'S 3RD VISIT.", 2, INK)
-    cv.hline(MX, 520, CW, INK, 2)
+    kicker(cv, 524, 410, 482, "SPACE - CHINA", "CONFIRMED")
+    draw_text(cv, 524, 432, "SHENZHOU-24 DOCKS AT", 3, INK, bold=True)
+    draw_text(cv, 524, 456, "TIANGONG STATION", 3, NAVY, bold=True)
+    scene_space(cv, 524, 482, 482, 40)
+    draw_text(cv, 524, 528, "MUHAMMAD ZEESHAN ALI, 40, IS THE FIRST", 2, INK)
+    draw_text(cv, 524, 544, "PAKISTANI IN ORBIT. CREW OF THREE.", 2, INK)
+    cv.hline(MX, 562, CW, INK, 2)
 
     # ---- briefs grid ------------------------------------------------------
-    for ci, sections in enumerate(COLUMNS):
-        sy = 526
-        for name, items in sections:
-            section_bar(cv, COLX[ci], sy, COLW, name)
-            brief_block(cv, COLX[ci], sy + 21, COLW, items)
-            sy += 21 + 37 * len(items) + 3
-    cv.vline(340, 526, 446, LIGHT, 2)
-    cv.vline(673, 526, 446, LIGHT, 2)
+    for ci, (name, items) in enumerate(BRIEFS_ROW1):
+        section_bar(cv, COLX[ci], 568, COLW, name)
+        brief_block(cv, COLX[ci], 592, COLW, items)
+    cv.vline(340, 568, 224, LIGHT, 2)
+    cv.vline(673, 568, 224, LIGHT, 2)
 
-    # ---- by the numbers (fills the shorter middle column) -----------------
-    cv.frame(COLX[1], 941, COLW, 31, INK, 2)
-    cv.rect(COLX[1], 941, COLW, 31, CREAM)
-    cv.frame(COLX[1], 941, COLW, 31, INK, 2)
-    draw_text(cv, COLX[1] + 8, 945, "BY THE NUMBERS: 66 JET DRONES", 2,
-              INK, bold=True)
-    draw_text(cv, COLX[1] + 8, 959, "200,000 TENTS - 1M SATS", 2, INK)
+    for ci, (name, items) in enumerate(BRIEFS_ROW2):
+        section_bar(cv, COLX[ci], 798, COLW, name)
+        brief_block(cv, COLX[ci], 822, COLW, items)
+    cv.vline(340, 798, 184, LIGHT, 2)
+    cv.vline(673, 798, 184, LIGHT, 2)
 
     # ---- date check -------------------------------------------------------
-    cv.frame(MX, 978, CW, 28, RED, 2)
-    draw_centered(cv, W // 2, 985, "DATE CHECK - HELD OUT: HUAWEI, SUDAN, "
+    cv.frame(MX, 990, CW, 28, RED, 2)
+    draw_centered(cv, W // 2, 997, "DATE CHECK - HELD OUT: HUAWEI, SUDAN, "
                   "RAS TANURA (TUE 24 NOV); HK FIRE (2025)", 2, RED,
                   bold=True)
     return cv
